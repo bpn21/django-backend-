@@ -1,0 +1,9 @@
+{%extends 'base.html' %}
+{%block content%}
+<form action="" method ="POST">
+    {%csrf_token%}
+    <span style="color: red">Are you sure want to delete <br></span>
+    {{product.details}}
+    <input type="submit" value="conform">
+</form>
+{%endblock content%}

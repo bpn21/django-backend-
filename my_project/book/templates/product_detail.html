@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+Catogory : {{product.catogory}} <br>
+Product Name : {{product.name}} <br>
+Brand : {{product.brand}} <br>
+Color : color :{{product.color}} <br> 
+Size : {{product.size}} <br>
+Created at: {{product.created_at}}
+
+<br><br>
+<a href="{% url 'update_product' product.pk %}">Edit</a>
+<a href="{% url 'remove_product' product.pk %}">Delete</a>
+{% endblock content %}
