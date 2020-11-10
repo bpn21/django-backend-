@@ -22,14 +22,17 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth', #Core authentication framework and its default models.
-    'django.contrib.contenttypes', # #Django content type system (allows permissions to be associated with models).
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.sessions',
+    'djoser',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
     'book',
-    'rest_framework',
+    'oauth2_provider',
     'django_extensions',
 
 ]
@@ -119,9 +122,33 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': (
-#     'rest_framework.permissions.AllowAny')}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+
+
+    ),
+      'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+ }
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),    
+}
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {},
+}
+
+
+#JWT 
+JWT_SECRET_KEY=os.environ.get('JWT_SECRET_KEY')
 
 # Base url to serve media files
 MEDIA_URL = '/media/'
